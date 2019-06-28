@@ -37,4 +37,28 @@ router.get('/articles/:id', async (req, res) => {
         res.status(500).send()
     }
 })
+
+router.patch('/articles/:id', async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['title', 'body', 'author']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+    try {
+        const article = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        if (!article) {
+            return res.status(404).send()
+        }
+
+        res.send(article)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+
+
 module.exports = router
