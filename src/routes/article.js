@@ -58,7 +58,19 @@ router.patch('/articles/:id', async (req, res) => {
         res.status(400).send(e)
     }
 })
+router.delete('/articles/:id', async (req, res) => {
+    try {
+        const article = await Article.findByIdAndDelete(req.params.id)
 
+        if (!article) {
+            res.status(404).send()
+        }
+
+        res.send(article)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 
 
 module.exports = router
