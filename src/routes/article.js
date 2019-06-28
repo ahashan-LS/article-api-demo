@@ -22,4 +22,19 @@ router.get('/articles', async (req, res) => {
     }
 })
 
+router.get('/articles/:id', async (req, res) => {
+    const _id = req.params.id
+
+    try {
+        const article = await Article.findById(_id)
+
+        if (!article) {
+            return res.status(404).send()
+        }
+
+        res.send(article)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 module.exports = router
