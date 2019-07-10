@@ -10,6 +10,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.6.4",
+    "nodemon": "^1.19.1",
+    "validator": "^11.1.0"
+  },
   "devDependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.6.4",
